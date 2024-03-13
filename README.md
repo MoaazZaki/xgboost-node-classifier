@@ -1,4 +1,4 @@
-# Graph XGBoost: High speed inference with incremental learning framework
+# Graph XGBoost: High speed node classification with incremental learning framework
 
 In this project, we address the problem of predictive node classification in directed graphs, where each graph consists of nodes and edges representing directional relationships between them. Some nodes within these graphs are missing, and the objective is to develop a predictive algorithm capable of determining the types of the missing nodes based on the existing graph structure.
 
