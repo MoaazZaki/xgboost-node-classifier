@@ -1,0 +1,58 @@
+version: '3'
+services:
+  graphml:
+    image: graphml
+    ports:
+      - "8081-8082:8080"
+    depends_on:
+      - redis
+      - opensearch
+    environment:
+      - REDIS_HOST=redis
+      - OPENSEARCH_HOST=opensearch
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    environment:
+      - discovery.type=single-node
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./ngnix.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - graphml
+      - redis
+      - opensearch
+
+  trainer:
+    image: graphml_trainer:latest
+    depends_on:
+      - graphml
+      - opensearch
+    build:
+      context: .
+      dockerfile: trainer.Dockerfile
+    deploy:
+      restart_policy:
+        condition: on-failure

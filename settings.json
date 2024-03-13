@@ -1,0 +1,19 @@
+{
+  "api_key": "3Fb6KpWx8RjDq2YvHs7eLt9gXuZoNfArEiCbPmGy1SdQt5UoIwAxQzVcJnMkOzLp",
+  "sentry_dsn": "some-sentry-dsn",
+  "redis_host": "redis://redis",
+  "model_path": ".cache/graph_xgboost.joblib",
+  "num_classes": 40,
+  "num_features": 107,
+  "unknown_token": "UNK",
+  "cache_expiry": 600,
+  "opensearch_host": "https://opensearch:9200",
+  "opensearch_user": "admin",
+  "opensearch_pass": "admin",
+  "opensearch_verify_certs": false,
+  "opensearch_index": "graphs_data",
+  "trainer_cron": "* * * * *",
+  "trainer_status_index": "graphs_trainer",
+  "trainer_minimum_dataset_size": 1000,
+  "app_host": "http://nginx:80"
+}
